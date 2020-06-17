@@ -20,7 +20,7 @@ export const signup = async (
         passwordConfirm: passwordConfirm,
       },
     });
-
+    console.log('μπηκαν', res);
     if (res.data.status === 'success') {
       showAlert('success', 'Account successfully created!');
       window.setTimeout(() => {
@@ -28,7 +28,7 @@ export const signup = async (
       }, 1500);
     }
 
-    console.log(res);
+    console.log('μετα', res);
   } catch (err) {
     console.log(err.response);
     //showAlert('error', err.response.data.message);
