@@ -11,7 +11,8 @@ export const signup = async (
   try {
     const res = await axios({
       method: 'POST',
-      url: 'http://127.0.0.1:3000/api/v1/users/signup',
+      //url: 'http://127.0.0.1:3000/api/v1/users/signup',
+      url: '/api/v1/users/signup',
       data: {
         name: name,
         email: emailSignup,
@@ -29,7 +30,7 @@ export const signup = async (
 
     //console.log(res);
   } catch (err) {
-    //console.log(err.response.data.message);
+    console.log(err.response.data.message);
     //showAlert('error', err.response.data.message);
     showAlert(
       'error',
