@@ -33,10 +33,7 @@ export const signup = async (
     console.log(err.response.data.message);
     //showAlert('error', err.response.data.message);
     //`Invalid input data. ${err.response.data.message.split(':')[1]}!`
-    showAlert(
-      'error',
-      `Invalid input data. ${err.response.data.message.split(':')[1]}!`
-    );
+    showAlert('error', `Invalid input data. ${err.response.data.message}!`);
   }
 };
 
