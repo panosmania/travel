@@ -39,8 +39,8 @@ if (signupForm) {
     e.preventDefault();
     //take name,emailSignup,passwordSignup and passwordConfirm value that the user put in from the browser
     const name = document.getElementById('name').value;
-    const emailSignup = document.getElementById('email').value;
-    const passwordSignup = document.getElementById('password').value;
+    const emailSignup = document.getElementById('emailSignup').value;
+    const passwordSignup = document.getElementById('passwordSignup').value;
     const passwordConfirm = document.getElementById('passwordConfirm').value;
     signup(name, emailSignup, passwordSignup, passwordConfirm);
   });
