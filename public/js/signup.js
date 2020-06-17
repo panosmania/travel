@@ -30,7 +30,7 @@ export const signup = async (
 
     //console.log(res);
   } catch (err) {
-    console.log(err.response.data.message);
+    console.log(err.response);
     //showAlert('error', err.response.data.message);
     //`Invalid input data. ${err.response.data.message.split(':')[1]}!`
     showAlert('error', `${err.response.data.message}!`);
