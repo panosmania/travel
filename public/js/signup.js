@@ -24,7 +24,7 @@ export const signup = async (
     if (res.data.status === 'success') {
       showAlert('success', 'Account successfully created!');
       window.setTimeout(() => {
-        location.assign('/');
+        location.replace('/');
       }, 1500);
     }
 
