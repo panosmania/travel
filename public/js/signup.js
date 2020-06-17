@@ -28,7 +28,7 @@ export const signup = async (
       }, 1500);
     }
 
-    console.log(res);
+    //console.log(res);
   } catch (err) {
     console.log(err.response);
     //showAlert('error', err.response.data.message);
