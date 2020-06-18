@@ -34,7 +34,9 @@ exports.signup = async (req, res, next) => {
       httpOnly: true,
     };
 
-    if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
+    //if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
+    if (req.secure || req.headers('x-forwarded-proto') === 'https')
+      cookieOptions.secure = true;
     res.cookie('jwt', token, cookieOptions);
 
     //Remove the password from the output
@@ -79,7 +81,9 @@ exports.login = async (req, res, next) => {
       httpOnly: true,
     };
 
-    if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
+    //if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
+    if (req.secure || req.headers('x-forwarded-proto') === 'https')
+      cookieOptions.secure = true;
     res.cookie('jwt', token, cookieOptions);
     res.status(200).json({
       status: 'success',
@@ -291,7 +295,9 @@ exports.resetPassword = async (req, res, next) => {
       httpOnly: true,
     };
 
-    if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
+    //if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
+    if (req.secure || req.headers('x-forwarded-proto') === 'https')
+      cookieOptions.secure = true;
     res.cookie('jwt', token, cookieOptions);
     res.status(200).json({
       status: 'success',
@@ -328,7 +334,9 @@ exports.updatePasswords = async (req, res, next) => {
       httpOnly: true,
     };
 
-    if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
+    //if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
+    if (req.secure || req.headers('x-forwarded-proto') === 'https')
+      cookieOptions.secure = true;
     res.cookie('jwt', token, cookieOptions);
     res.status(200).json({
       status: 'success',
