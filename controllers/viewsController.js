@@ -1,7 +1,17 @@
-const Tour = require('./../models/tourModel');
-const User = require('./../models/userModel');
-const Booking = require('./../models/bookingModel');
+const Tour = require('../models/tourModel');
+const User = require('../models/userModel');
+const Booking = require('../models/bookingModel');
 const AppError = require('../utils/appError');
+
+exports.alerts = (req, res, next) => {
+  const { alert } = req.query;
+
+  if (alert === 'booking') {
+    res.locals.alert =
+      "Your booking was successful! Please check your email for a confirmation. If your doesn't show up here immediately, please come back later.  ";
+  }
+  next();
+};
 
 exports.getOverview = async (req, res, next) => {
   try {
