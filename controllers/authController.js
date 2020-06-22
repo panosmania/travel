@@ -231,7 +231,7 @@ exports.forgotPassword = async (req, res, next) => {
       const url = `${req.protocol}://${req.get('host')}`;
       if (
         url === 'http://127.0.0.1:3000' ||
-        url === 'https://tse-travels-app.herokuapp.com/'
+        url === 'https://tse-travels-app.herokuapp.com'
       ) {
         resetURL = `${url}/reset-Password/${resetToken}`;
       } else {
