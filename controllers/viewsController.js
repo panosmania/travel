@@ -1,3 +1,4 @@
+const crypto = require('crypto');
 const Tour = require('../models/tourModel');
 const User = require('../models/userModel');
 const Booking = require('../models/bookingModel');
@@ -94,25 +95,60 @@ exports.getMyTours = async (req, res, next) => {
   }
 };
 
-exports.updateUserData = async (req, res, next) => {
+// exports.updateUserData = async (req, res, next) => {
+//   try {
+//     //console.log('UPDATING USER', req.body);
+
+//     const updatedUser = await User.findByIdAndUpdate(
+//       req.user.id,
+//       {
+//         name: req.body.name,
+//         email: req.body.email,
+//       },
+//       {
+//         new: true,
+//         runValidators: true,
+//       }
+//     );
+
+//     res.status(200).render('account', {
+//       title: 'Your account!',
+//       user: updatedUser,
+//     });
+//   } catch (err) {
+//     next(err);
+//   }
+// };
+
+exports.getResetPasswordForm = async (req, res, next) => {
   try {
-    //console.log('UPDATING USER', req.body);
+    //console.log('malaka', req.params.token);
 
-    const updatedUser = await User.findByIdAndUpdate(
-      req.user.id,
-      {
-        name: req.body.name,
-        email: req.body.email,
-      },
-      {
-        new: true,
-        runValidators: true,
-      }
-    );
+    // 1) Get user based on the token
+    const hashedToken = crypto
+      .createHash('sha256')
+      .update(req.params.token)
+      .digest('hex');
 
-    res.status(200).render('account', {
+    //console.log('hashedToken', hashedToken);
+
+    const user = await User.findOne({
+      passwordResetToken: hashedToken,
+      passwordResetExpires: { $gt: Date.now() },
+    });
+
+    //console.log('user', user);
+
+    // 2) If token has not expired, and there is user, set the new password
+    if (!user) {
+      return next(
+        new AppError('Reset password link is invalid or has expired!', 400)
+      );
+    }
+
+    res.status(200).render('resetPassword', {
       title: 'Your account!',
-      user: updatedUser,
+      token: req.params.token,
     });
   } catch (err) {
     next(err);

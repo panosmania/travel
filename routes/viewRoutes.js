@@ -25,10 +25,12 @@ router.get(
   viewsController.getMyTours
 );
 
-router.post(
-  '/submit-user-data',
-  authController.protect,
-  viewsController.updateUserData
-);
+// router.post(
+//   '/submit-user-data',
+//   authController.protect,
+//   viewsController.updateUserData
+// );
+
+router.get('/reset-Password/:token', viewsController.getResetPasswordForm);
 
 module.exports = router;

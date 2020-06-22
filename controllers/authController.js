@@ -22,7 +22,7 @@ exports.signup = async (req, res, next) => {
       role: req.body.role,
     });
     const url = `${req.protocol}://${req.get('host')}/me`;
-    //console.log(url);
+    console.log(url);
 
     await new Email(newUser, url).sendWelcome();
 
@@ -227,9 +227,20 @@ exports.forgotPassword = async (req, res, next) => {
     // const message = `Forgot your password? Submit a PATCH request with your new password and passwordConfirm to: ${resetURL}.\nIf you didn't forget your password, please ignore this email!`;
 
     try {
-      const resetURL = `${req.protocol}://${req.get(
-        'host'
-      )}/api/v1/users/resetPassword/${resetToken}`;
+      let resetURL = '';
+      const url = `${req.protocol}://${req.get('host')}`;
+      if (
+        url === 'http://127.0.0.1:3000' ||
+        url === 'https://tse-travels-app.herokuapp.com/'
+      ) {
+        resetURL = `${url}/reset-Password/${resetToken}`;
+      } else {
+        resetURL = `${url}/api/v1/users/resetPassword/${resetToken}`;
+      }
+
+      // const resetURL = `${req.protocol}://${req.get(
+      //   'host'
+      // )}/api/v1/users/resetPassword/${resetToken}`;
 
       // await sendEmail({
       //   email: user.email,
@@ -267,10 +278,14 @@ exports.resetPassword = async (req, res, next) => {
       .update(req.params.token)
       .digest('hex');
 
+    //console.log('hashedToken', hashedToken);
+
     const user = await User.findOne({
       passwordResetToken: hashedToken,
       passwordResetExpires: { $gt: Date.now() },
     });
+
+    //console.log('user', user);
 
     // 2) If token has not expired, and there is user, set the new password
     if (!user) {

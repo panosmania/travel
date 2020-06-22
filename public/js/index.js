@@ -6,6 +6,8 @@ import { signup } from './signup';
 import { updateSettings } from './updateSettings';
 import { bookTour } from './stripe';
 import { showAlert } from './alerts';
+import { forgotPassword } from './forgotPassword';
+import { resetPassword } from './resetPassword';
 
 //console.log('hello from parcel');
 // DOM ELEMENTS
@@ -16,6 +18,8 @@ const signupForm = document.querySelector('.form--signup');
 const userDataForm = document.querySelector('.form-user-data');
 const userPasswordForm = document.querySelector('.form-user-password');
 const bookBtn = document.getElementById('book-tour');
+const forgotPasswordForm = document.querySelector('.form--forgotPassword');
+const resetPasswordForm = document.querySelector('.form--reset');
 
 // VALUES
 
@@ -93,6 +97,30 @@ if (bookBtn) {
     e.target.textContent = 'Processing...';
     const { tourId } = e.target.dataset;
     bookTour(tourId);
+  });
+}
+
+if (forgotPasswordForm) {
+  forgotPasswordForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const email = document.getElementById('emailforgotpass').value;
+    forgotPassword(email);
+  });
+}
+
+if (resetPasswordForm) {
+  resetPasswordForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const passwordReset = document.getElementById('passwordReset').value;
+    const passwordConfirmReset = document.getElementById('passwordConfirmReset')
+      .value;
+    //const { tokens } = e.target.dataset;
+    const tokens = document.getElementById('tokenID').dataset.tokens;
+
+    //console.log('prin', passwordReset, passwordConfirmReset, tokens);
+
+    resetPassword(passwordReset, passwordConfirmReset, tokens);
   });
 }
 
