@@ -32,7 +32,7 @@ body {
   font-weight: 300;
   font-family: 'Lato', sans-serif;
   color: #777;
-  padding: 3rem;
+  padding: 0rem;
   min-height: 100vh;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -128,6 +128,13 @@ body {
   line-height: 1.3;
   display: inline-block;
 }
+
+@media only screen and (max-width: 50em) {
+  .heading-secondary {
+    text-align: center;
+  }
+}
+
 .heading-secondary--error {
   background-image: -webkit-gradient(
     linear,
@@ -354,6 +361,12 @@ body {
 @media only screen and (max-width: 62.5em) {
   .section-header {
     height: 98vw;
+  }
+}
+
+@media only screen and (max-width: 50em) {
+  .section-header {
+    height: 130vw;
   }
 }
 
@@ -816,6 +829,7 @@ body {
 @media only screen and (max-width: 50em) {
   .user-view__menu {
     max-width: 15rem;
+    margin-left: -5.2rem;
   }
 }
 
@@ -1165,7 +1179,7 @@ body {
   max-width: 120rem;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(auto-fill, 350px);
+  grid-template-columns: repeat(auto-fill, 280px);
   grid-gap: 7rem;
 
   @media screen and (min-width: 621px) {
@@ -1357,6 +1371,14 @@ body {
   /* Pseudo element (a visible thing that isn't really in the DOM).
       Also needs -ms- */
 }
+
+@media only screen and (max-width: 50em) {
+  .form__input {
+    max-width: 15rem;
+    margin-left: 0.5rem;
+  }
+}
+
 .form__input:focus {
   outline: none;
   border-bottom: 3px solid #55c57a;
@@ -1377,6 +1399,12 @@ body {
   font-size: 1.6rem;
   font-weight: 700;
   margin-bottom: 0.75rem;
+}
+
+@media only screen and (max-width: 62.5em) {
+  .form__label {
+    text-align: center;
+  }
 }
 
 .form__photo-upload {
